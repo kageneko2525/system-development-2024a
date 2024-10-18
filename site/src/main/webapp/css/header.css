@@ -1,0 +1,24 @@
+@charset "UTF-8";
+body{
+    margin: 0;
+}
+header{
+    background-color: orange;
+    margin: 0px;    
+    padding: 0px;
+    padding-left: 5%;
+}
+
+.header_box {
+    display: flex;    
+    width: 100%;
+}
+
+.header_logo{
+    width: 30%;
+}
+
+.header_search{
+    margin: auto;
+}
+
