@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+    body {
+      font-family: "メイリオ", meiryo, sans-serif;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      /* 最低限の高さを指定し、画面サイズが狭くなったらスクロールを許可 */
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    @media (max-width: 639px) {
+      h2 {
+        font-size: 3.5vw;
+        /* 639px以下のときはフォントサイズを小さくする */
+      }
+    }
+
+    #make_thread {
+      border: 2px solid #000000;
+      width: 30vw;
+      height: 10vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 5vh;
+      /* 各ボックスの間に余白を追加 */
+    }
+
+    .border {
+      border: 2px solid #000000;
+      width: 60vw;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      /* 縦方向の並びにする */
+      justify-content: flex-end;
+      /* 子要素を下に配置 */
+      align-items: center;
+      margin-bottom: 2vh;
+      /* 各ボックスの間に余白を追加 */
+    }
+
+    .border1 {
+      border-top: 2px solid #000000;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
