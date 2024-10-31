@@ -5,9 +5,8 @@
     align-items: center;
     margin-top: 50px;
   }
-  
-  /* スレッド作成ボタン */
-  .create-thread-button {
+
+.create-thread-button {
     font-size: 18px;
     padding: 10px 20px;
     margin-bottom: 20px;
@@ -18,13 +17,14 @@
     cursor: pointer;
   }
   
-  /* 並べ替えボタン */
-  .sort-dropdown {
+ /* 並べ替えボタン */
+.sort-dropdown {
     position: absolute;
-    left: 20%; /* スレッド作成ボタンの左に配置 */
+    left: 20%;
+    margin-bottom: 20px;
   }
   
-  #sort-button {
+  #sort-select {
     font-size: 16px;
     padding: 8px 15px;
     background-color: #333;
@@ -32,31 +32,6 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 160px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  
-  .dropdown-content a {
-    color: black;
-    padding: 10px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .dropdown-content a:hover {
-    background-color: #ddd;
-  }
-  
-  /* ホバーでドロップダウン表示 */
-  .sort-dropdown:hover .dropdown-content {
-    display: block;
   }
   
   /* スレッド一覧 */
@@ -72,6 +47,7 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #f9f9f9;
+    cursor: pointer;
   }
   
   .thread-tag {
@@ -79,13 +55,14 @@
     color: #007bff;
   }
   
-  .thread-title {
-    font-size: 16px;
-    font-weight: bold;
-    margin: 5px 0;
+  .thread-title a {
+    text-decoration: none;
+    color: #333;
   }
   
-  .thread-date {
+  .thread-date,
+  .thread-update,
+  .thread-activity {
     font-size: 12px;
     color: #555;
   }
