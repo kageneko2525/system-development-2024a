@@ -4,8 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>thread_list</title>
+    <link rel="stylesheet" href="../css/thread_list.css" type="text/css">
 </head>
 <body>
-    
+    <div class="container">
+        <!-- 並べ替えボタン -->
+        <div class="sort-dropdown">
+          <button id="sort-button">並べ替え</button>
+          <div class="dropdown-content">
+            <a href="#">新着順</a>
+            <a href="#">勢い順</a>
+            <a href="#">人気順</a>
+          </div>
+        </div>
+      
+        <!-- スレッド作成ボタン -->
+        <button class="create-thread-button">スレッド作成</button>
+      
+        <!-- スレッド一覧 -->
+        <div class="thread-list">
+          <div class="thread-item">
+            <p class="thread-tag">#タグ1</p>
+            <p class="thread-title">スレッドタイトル1</p>
+            <p class="thread-date">2024/10/31</p>
+          </div>
+          <div class="thread-item">
+            <p class="thread-tag">#タグ2</p>
+            <p class="thread-title">スレッドタイトル2</p>
+            <p class="thread-date">2024/10/30</p>
+          </div>
+          <div class="thread-item">
+            <p class="thread-tag">#タグ3</p>
+            <p class="thread-title">スレッドタイトル3</p>
+            <p class="thread-date">2024/10/29</p>
+          </div>
+          <div class="thread-item">
+            <p class="thread-tag">#タグ4</p>
+            <p class="thread-title">スレッドタイトル4</p>
+            <p class="thread-date">2024/10/28</p>
+          </div>
+          <div class="thread-item">
+            <p class="thread-tag">#タグ5</p>
+            <p class="thread-title">スレッドタイトル5</p>
+            <p class="thread-date">2024/10/27</p>
+          </div>
+        </div>
+      </div>
+      
 </body>
 </html>
