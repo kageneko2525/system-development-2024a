@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="./../css/report.css">
+	<title>Super Chat</title>
+
+</head>
+
+<body>
+	
+
+	
+	<!-- input要素の配置は、ポップアップ部分より前にする -->
+	<input type="checkbox" id="popup">
+
+	<!-- ポップアップ部分 -->
+	<div id="overlay">
+		<label for="popup" id="bg_gray"></label> <!-- ウィンドウの外のグレーの領域 -->
+
+		<div id="window"> <!-- ウィンドウ部分 -->
+			<label for="popup" id="btn_cloth"> <!-- 閉じるボタン -->
+				<span></span>
+			</label>
+			<br id="msg"> <!-- ウィンドウのコンテンツ -->
+			<h2>通報</h2></br>
+			<p>ユーザーを通報する理由として当てはまるものを以下から選択してください。</p>
+			<form method="GET">
+			<input type="checkbox" name="report" value="spam">スパム
+			<input type="checkbox" name="report" value="Harassment">嫌がらせ・ハラスメント
+			<input type="checkbox" name="report" value="inappropriate">暴力的または不適切なコンテンツ
+			<input type="checkbox" name="report" value="privacy">個人情報の公開</br>
+			<input type="checkbox" name="report" value="infringement">著作権侵害
+			<input type="checkbox" name="report" value="hate">差別やヘイトスピーチ</br>
+			
+			<input type="text" name="name"></p>
+	        <p><input type="button" value="送信" id="button2"></p>
+			</form>
+		</div>
+	</div>
+	<div class="box">
+		<p>
+			<font size="20"> <label for="popup" id="txt_label">通報</label></font>
+		</p>
+	</div>
+</body>
+
+</html>
