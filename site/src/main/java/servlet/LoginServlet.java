@@ -23,8 +23,8 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		String forwardPath = "/WEB-INF/html/login.html";
+		System.out.println("Loginサーブレット起動");
+		String forwardPath = "/html/login.html";
 		HttpSession session = request.getSession();
 		
 
@@ -51,6 +51,7 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("Loginサーブレット起動");
 		doGet(request, response);
 	}
 
