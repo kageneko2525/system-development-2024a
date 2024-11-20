@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スレッド作成フォーム</title>
+  <link rel="stylesheet" href="../css/thread_make.css">
+</head>
+<body>
+  <div class="form-container">
+    <h1>スレッドを作成</h1>
+    <form action="/site/ThreadMake" method="post">
+      <!-- スレッド名 -->
+      <label for="threadName">スレッド名 (必須):</label>
+      <input type="text" id="threadName" name="threadName" required>
+
+      <!-- 標準タグ -->
+      <fieldset>
+        <legend>標準タグ:</legend>
+        <label><input type="checkbox" name="standardTags" value="政治"> 政治</label>
+        <label><input type="checkbox" name="standardTags" value="スポーツ"> スポーツ</label>
+        <label><input type="checkbox" name="standardTags" value="ゲーム"> ゲーム</label>
+        <label><input type="checkbox" name="standardTags" value="雑談"> 雑談</label>
+      </fieldset>
+
+      <!-- カスタムタグ -->
+      <label for="customTag">カスタムタグ (カンマで区切って入力):</label>
+      <input type="text" id="customTag" name="customTag">
+      <button type="button" id="addCustomTag">追加</button>
+
+      <!-- タグ欄 -->
+      <div id="tagsContainer">
+        <h3>選択されたタグ:</h3>
+        <div id="selectedTags"></div>
+      </div>
+      
+      <!-- 隠しフィールド -->
+  	  <input type="hidden" id="allTags" name="allTags">
+
+      <!-- 利用規約 -->
+      <p><a href="termsofservice.html" target="_blank">利用規約</a>に同意します。</p>
+      <label><input type="checkbox" id="agreeTerms" required> 同意する</label>
+
+      <!-- スレッド作成ボタン -->
+      <button type="submit" id="createThread" disabled>スレッドを作成</button>
+    </form>
+  </div>
+
+  <script src="../js/thread_make.js"></script>
+</body>
+</html>

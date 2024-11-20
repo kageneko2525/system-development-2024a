@@ -39,4 +39,14 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ThreadMakeServlet</display-name>
+    <servlet-name>ThreadMakeServlet</servlet-name>
+    <servlet-class>servlet.ThreadMakeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ThreadMakeServlet</servlet-name>
+    <url-pattern>/ThreadMakeServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
