@@ -25,7 +25,11 @@ public class JsonLogic {
 	
 		try {
 			System.out.println("try入り");
-			mapper.writeValue(new File("I:/git/system-development-2024-Eclipse/site/src/main/webapp/json/"+id+".json"), threadDto);
+			//mapper.writeValue(new File("I:/git/system-development-2024-Eclipse/site/src/main/webapp/json/"+id+".json"), threadDto);
+			
+			
+			//neko用
+			mapper.writeValue(new File("I:/git/system-development-2024a/site/src/main/webapp/json"+id+".json"), threadDto);
 			System.out.println("try終わり");
 		} catch (Exception e) {
 			System.out.println(e);
