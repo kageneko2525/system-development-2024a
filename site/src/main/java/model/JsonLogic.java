@@ -1,7 +1,6 @@
 package model;
 import java.io.File;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,12 +16,12 @@ public class JsonLogic {
 	public void createJson(String id, String title, Timestamp time, ArrayList<String> tags) {
 		
 		//Timestamp→String
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String ConvertedTime = sdf.format(time);
+		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //String ConvertedTime = sdf.format(time);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		
-		ThreadDto threadDto = new ThreadDto(id, title, ConvertedTime);
+		ThreadDto threadDto = new ThreadDto(id, title, time);
 		
 		try {
 			//タグが存在する場合、タグをセット
