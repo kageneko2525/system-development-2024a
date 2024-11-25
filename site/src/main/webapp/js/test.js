@@ -1,6 +1,6 @@
 // test.js
 document.addEventListener('DOMContentLoaded', function() {
-    let userId = document.querySelector('input[name="id"]').value;
+    let threadId = document.querySelector('input[name="id"]').value;
     let messageInput = document.getElementById('messageInput');
     let messagesDiv = document.getElementById('messages');
     let socket = null;
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // コンテキストパスを動的に取得
         const contextPath = window.location.pathname.split('/')[1]; // サイトのコンテキストパスを取得
         const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-        const wsUrl = `${wsProtocol}//${window.location.host}/${contextPath}/Thread/${userId}`;
+        const wsUrl = `${wsProtocol}//${window.location.host}/${contextPath}/Thread/${threadId}`;
         
         console.log("接続を試みます: " + wsUrl);
         socket = new WebSocket(wsUrl);

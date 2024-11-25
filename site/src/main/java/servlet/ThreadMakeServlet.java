@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import dao.ThreadMakeDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -49,14 +48,14 @@ public class ThreadMakeServlet extends HttpServlet {
 		
 		int thread_no = 0;
 
-		        //tagsListは選択されたタグ、threadNameはスレッド名。これらを使ってJSONファイル作成
-		        //最新のスレッドidを取得する　変数はthred_no
-		        ThreadMakeDao th = new ThreadMakeDao();
-		        thread_no = th.findLatestThread();
-		        thread_no ++;
+//		        //tagsListは選択されたタグ、threadNameはスレッド名。これらを使ってJSONファイル作成
+//		        //最新のスレッドidを取得する　変数はthred_no
+//		        ThreadMakeDao th = new ThreadMakeDao();
+//		        thread_no = th.findLatestThread();
+//		        thread_no ++;
 
-//		//いったんデフォルト値
-//		thread_no = 1;
+		//いったんデフォルト値
+		thread_no = 1;
 
 		// 現在時刻を取得
 		LocalDateTime now = LocalDateTime.now();
