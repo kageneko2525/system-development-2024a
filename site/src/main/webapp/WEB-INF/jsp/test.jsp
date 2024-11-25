@@ -59,6 +59,6 @@
 
 
 
-    <script src="./js/test.js"></script>
+    <script defer src="./js/test.js"></script>
 </body>
 </html>
