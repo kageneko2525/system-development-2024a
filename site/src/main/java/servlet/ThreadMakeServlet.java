@@ -1,11 +1,12 @@
 package servlet;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
+import dao.ThreadMakeDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -46,43 +47,45 @@ public class ThreadMakeServlet extends HttpServlet {
 		}
 		
 		
-		int thread_no = 0;
+		int threadNo = 0;
 
-//		        //tagsListは選択されたタグ、threadNameはスレッド名。これらを使ってJSONファイル作成
-//		        //最新のスレッドidを取得する　変数はthred_no
-//		        ThreadMakeDao th = new ThreadMakeDao();
-//		        thread_no = th.findLatestThread();
-//		        thread_no ++;
-
-		//いったんデフォルト値
-		thread_no = 1;
-
-		// 現在時刻を取得
-		LocalDateTime now = LocalDateTime.now();
-		// フォーマットを定義
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		// フォーマット済みの現在時刻を取得
-		String formattedTime = now.format(formatter);
-
+		 //tagsListは選択されたタグ、threadNameはスレッド名。これらを使ってJSONファイル作成
+		 //最新のスレッドidを取得する　変数はthred_no
+		ThreadMakeDao th = new ThreadMakeDao();
+		threadNo = th.findLatestThread();
+		threadNo ++;
+		
+		//DB登録のためこちら側で時刻取得
+		Date date = new Date();
+		Timestamp timestamp = new Timestamp(date.getTime());
+		
 		//JSON作成
 		JsonLogic jsonLogic = new JsonLogic();
-
-		jsonLogic.createJson(String.valueOf(thread_no), formattedTime, tagsList);
-
-		//本来はここにJSONの保存先のパス thread_urlを設定
+		jsonLogic.createJson(String.valueOf(threadNo), threadName, timestamp, tagsList);
+		
+		//threadのurl設定(DB登録のパス)
+		//"I:/git/system-development-2024a/site/src/main/webapp/json" デフォルト
+		String threadUrl = "I:/git/system-development-2024a/site/src/main/webapp/json"+threadNo+".json";
+		
+		//threadState 0で生存？
+		int threadState = 0;
 
 		//DB側に登録
+		//登録項目はthreadNo(スレッドID),threadName(スレッドの名前),threadUrl(スレッドのパス),timestamp(スレッドの生成時間),threadState(スレッドの状態)
+		th.newCreateThread(threadNo, threadName, threadUrl, timestamp, threadState);
 
-//		
+		
+		//どこにとばせばええですか
+		
 //		// データをリクエスト属性にセットして、JSPに渡す
 //		request.setAttribute("threadName", threadName);
 //		request.setAttribute("tagsList", tagsList);
 //		
 //		
 		//threadIDを渡すためのリクエストスコープ
-		request.setAttribute("id", thread_no);
+		//request.setAttribute("id", threadNo);
 		// テスト用のJSPに転送
-		request.getRequestDispatcher("/WEB-INF/jsp/test.jsp").forward(request, response);
+		//request.getRequestDispatcher("/WEB-INF/jsp/test.jsp").forward(request, response);
 		
 
 	}

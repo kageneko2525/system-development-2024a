@@ -1,8 +1,8 @@
 package model;
 import java.io.File;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 /**
@@ -10,30 +10,32 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class JsonLogic {
 	
-	public void createJson(String id, String title ,ArrayList<String> tags) {
-		System.out.println("json開始");
-		Date date = new Date();
-		Timestamp createTime = new Timestamp(date.getTime());
+	//jsonの保存場所の指定。各クラスで使用するためクラス変数で宣言。環境に合わせて実行時に変えてもらえると〇
+	//"I:/git/system-development-2024a/site/src/main/webapp/json/"　デフォルト値
+	private String filePath = "I:/git/system-development-2024a/site/src/main/webapp/json/";
+	
+	public void createJson(String id, String title, Timestamp time, ArrayList<String> tags) {
 		
-		
-		ThreadDto threadDto  = new ThreadDto(id, title,createTime);
-//		threadDto.addContents(new ContentDto());
-		
+		//Timestamp→String
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String ConvertedTime = sdf.format(time);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		
-	
+		ThreadDto threadDto = new ThreadDto(id, title, ConvertedTime);
+		
 		try {
-			System.out.println("try入り");
-			//mapper.writeValue(new File("I:/git/system-development-2024-Eclipse/site/src/main/webapp/json/"+id+".json"), threadDto);
+			//タグが存在する場合、タグをセット
+			if(tags != null) {
+				threadDto.setTags(tags);
+			}
 			
+			mapper.writeValue(new File(filePath + "json" + id + ".json"), threadDto);
 			
-			//neko用
-			mapper.writeValue(new File("I:/git/system-development-2024a/site/src/main/webapp/json"+id+".json"), threadDto);
-			System.out.println("try終わり");
-		} catch (Exception e) {
-			System.out.println(e);
+		} catch(Exception e) {
+			
+			System.out.print(e);
+			
 		}
-	
 	}
 }

@@ -1,12 +1,11 @@
 package model;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 public class ThreadDto {
     public ThreadDto() {
         contentList = new ArrayList<ContentDto>();
     }
-    public ThreadDto(String id, String title, Timestamp createTime) {
+    public ThreadDto(String id, String title, String createTime) {
         this.id = id;
         this.title = title;
         this.createTime = createTime;
@@ -16,7 +15,7 @@ public class ThreadDto {
     private String id;
     private String title;
     private List<String> tags;
-    private Timestamp createTime;
+    private String createTime;
     private List<ContentDto> contentList;
     public String getId() {
         return id;
@@ -39,10 +38,10 @@ public class ThreadDto {
     public void addTags(String tag){
         this.tags.add(tag);
     }
-    public Timestamp getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
-    public void setCreateTime(Timestamp createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
     public List<ContentDto> getContents() {
