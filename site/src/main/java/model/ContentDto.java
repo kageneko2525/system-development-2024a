@@ -16,6 +16,8 @@ public class ContentDto {
         this.content = content ;
         optionList = new ArrayList<OptionDto>();        
     }
+    
+    
     private int id;
     private String userId;
     private String userName;
