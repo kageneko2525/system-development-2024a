@@ -82,7 +82,7 @@
         }
 
         const userId = new URLSearchParams(window.location.search).get('id');
-        const apiUrl = `http://localhost:8080/UserProfileApp/api/user?id=${userId}`;
+        const apiUrl = `http://localhost:8080/site/Profile?id=${userId}`;
 
         fetch(apiUrl)
             .then(response => response.json())
