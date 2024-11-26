@@ -1,3 +1,5 @@
+//Thread.java
+
 package model;
 
 import java.io.IOException;
@@ -112,30 +114,36 @@ public class Thread {
 	@OnMessage
 	public void onMessage(String message, Session session, @PathParam("room") String room) {
 		System.out.println("受信メッセージ: " + message + " from " + session.getId() + " in room: " + room);
-
+		JsonLogic jsonLogic = new JsonLogic();
+		ContentDto contentDto = null;
 		try {
 			// 受信したJSONメッセージをパース
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode jsonNode = mapper.readTree(message);
+			
 
 			// メッセージデータを取得
 			String threadId = jsonNode.get("threadId").asText();
+			String userId = jsonNode.get("userId").asText();
+			String userName = null;
 			String messageText = jsonNode.get("message").asText();
 
 			// 現在のタイムスタンプを生成
 			Date date = new Date();
 			Timestamp contenttime = new Timestamp(date.getTime());
+			contentDto = new ContentDto(jsonLogic.getContentId(threadId)+1,userId,userName,contenttime,messageText);
 
+			
+			
 			// メッセージを永続化（JSONファイルに保存）
-			JsonLogic jsonLogic = new JsonLogic();
-			jsonLogic.addContent(threadId, messageText, contenttime);
+			jsonLogic.addContent(threadId, contentDto);
 
 		} catch (Exception e) {
 			System.err.println("メッセージ処理エラー: " + e.getMessage());
 		}
 
 		// メッセージをルーム内の全員にブロードキャスト
-		broadcastMessage(room, sessionUserMap.get(session).displayName, message);
+		broadcastMessage(room, sessionUserMap.get(session).displayName,jsonLogic.changeContentDtoToObjectNode(contentDto).toString() );
 	}
 
 	/**

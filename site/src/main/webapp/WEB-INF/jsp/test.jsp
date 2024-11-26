@@ -1,3 +1,5 @@
+<% //test.jsp %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, java.net.URLEncoder" %>
 <% 
@@ -58,7 +60,8 @@
     </div>
 
 
-
+    <script src="./js/thread.js"></script>
     <script defer src="./js/test.js"></script>
+    
 </body>
 </html>

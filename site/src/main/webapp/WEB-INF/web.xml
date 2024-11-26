@@ -49,4 +49,14 @@
     <servlet-name>ThreadMakeServlet</servlet-name>
     <url-pattern>/ThreadMakeServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserCookieServlet</display-name>
+    <servlet-name>UserCookieServlet</servlet-name>
+    <servlet-class>servlet.UserCookieServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserCookieServlet</servlet-name>
+    <url-pattern>/UserCookieServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

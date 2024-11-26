@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-
 /**
  * json生成・追加・取得
  */
@@ -30,7 +29,7 @@ public class JsonLogic {
 		ObjectMapper mapper = new ObjectMapper();
 
 		//ThreadDto threadDto = new ThreadDto(id, title, ConvertedTime);
-		ThreadDto threadDto = new ThreadDto(id, title,time);
+		ThreadDto threadDto = new ThreadDto(id, title, time);
 
 		try {
 			//タグが存在する場合、タグをセット
@@ -47,43 +46,72 @@ public class JsonLogic {
 		}
 	}
 
-	
-	
-	
-	
-	/**
-	 * Contentsに保存　optionない用
-	 * @param threadId スレッドコンテントID
-	 * @param content 内容
-	 * @param timestamp 登校時間
-	 * @author x22u011
-	 */
-	public void addContent(String threadId, String content, Timestamp timestamp) {
+/**
+ * jsonのcontentに新しいcontentを追加
+ * @param threadId 追加したいスレッドのId
+ * @param contentDto 中身を入力したcontent
+ */
+	public void addContent(String threadId ,ContentDto contentDto) {
 		//配列名
 		String arrayName = "contents";
-		
+
 		ObjectMapper mapper = new ObjectMapper();
-		
+		String fileName = filePath + "json" + threadId + ".json";
 		try {
-			
-			JsonNode rootNode = mapper.readTree(new File(filePath + "json" + id + ".json"));
-			ArrayNode arrayNode = (ArrayNode)rootNode.get(arrayName);
-			
-            if (arrayNode == null) {
-                // 配列が存在しない場合、新しく作成する
-                arrayNode = mapper.createArrayNode();
-                ((ObjectNode) rootNode).set(arrayName, arrayNode);
-            }
-            
-            //contentのID
-            int id = arrayNode.size()+1;
-            ObjectNode newcontent = mapper.createObjectNode();
-			newcontent.put("id",id);
+			JsonNode rootNode = mapper.readTree(new File(fileName));
+			ArrayNode arrayNode = (ArrayNode) rootNode.get(arrayName);
 			
 			
+			ObjectNode contentNode = changeContentDtoToObjectNode(contentDto);
+			arrayNode.add(contentNode);
+			
+			mapper.writerWithDefaultPrettyPrinter().writeValue(new File(fileName), rootNode);
+
+			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	}
+	
+	
+	
+	public ObjectNode changeContentDtoToObjectNode(ContentDto contentDto) {
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.valueToTree(contentDto);
+		
+	}
+
+	/**
+	 * Contentの最終IDを取得
+	 * @param threadId 取得したいスレッドId
+	 * @return contentのID
+	 */
+	public int getContentId(String threadId) {
+		int id = 0 ;
+		String arrayName = "contents";
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		try {
+
+			JsonNode rootNode = mapper.readTree(new File(filePath + "json" + threadId + ".json"));
+			ArrayNode arrayNode = (ArrayNode) rootNode.get(arrayName);
+
+			if (arrayNode == null) {
+				// 配列が存在しない場合、新しく作成する
+				arrayNode = mapper.createArrayNode();
+				((ObjectNode) rootNode).set(arrayName, arrayNode);
+			}
+
+			//contentのID
+			 id = arrayNode.size() ;
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return id;
 	}
 
 }

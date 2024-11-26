@@ -1,3 +1,5 @@
+//test.js
+
 document.addEventListener('DOMContentLoaded', function() {
 	let threadId = document.querySelector('input[name="id"]').value;
 	let messageInput = document.getElementById('messageInput');
@@ -34,7 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		socket.onmessage = function(event) {
 			console.log("サーバーからのメッセージ: " + event.data);
-			appendMessage(event.data);
+
+			appendContent(extractJsonFromMessage(event.data));
 		};
 
 		socket.onclose = function(event) {
@@ -58,13 +61,67 @@ document.addEventListener('DOMContentLoaded', function() {
 		};
 	}
 
-	function appendMessage(message) {
-		const messageElement = document.createElement('div');
-		messageElement.className = 'message';
-		messageElement.textContent = message;
-		messagesDiv.appendChild(messageElement);
+
+	function extractJsonFromMessage(message) {
+		try {
+			const jsonMatch = message.match(/{.*}/);
+			if (jsonMatch) {
+				return JSON.parse(jsonMatch[0]);
+			}
+			return null;
+		} catch (error) {
+			console.error('JSON解析エラー:', error);
+			return null;
+		}
+	}
+
+
+	function appendContent(message) {
+		console.log("アペンド開始")
+
+		const contntBoxElement = document.createElement('div')
+		contntBoxElement.className = "content-box"
+
+		const contentIdElement = document.createElement('p');
+		contentIdElement.className = 'id';
+		contentIdElement.textContent = `ID: ${message.id}`;
+		contntBoxElement.appendChild(contentIdElement);
+
+		const userNameElement = document.createElement('p');
+		userNameElement.className = 'userName';
+		userNameElement.textContent = `ユーザー名: ${message.userName}`;
+		contntBoxElement.appendChild(userNameElement);
+
+		const postingTimeElement = document.createElement('p');
+		postingTimeElement.className = 'time';
+		postingTimeElement.textContent = `投稿時間: ${message.postingTime}`;
+		contntBoxElement.appendChild(postingTimeElement);
+
+		const contentTextElement = document.createElement('p');
+		contentTextElement.className = 'content';
+		contentTextElement.textContent = `内容: ${message.content}`;
+
+
+
+		if (message.option != null) {
+
+			// タグに従ってスタイルを追加
+			message.tags.forEach(tag => {
+				let cssProperty = tag.tag;
+				if (cssProperty === 'font-color') {
+					cssProperty = 'color'; // font-color を color に変換
+				}
+				contentTextElement.style[cssProperty] = tag.value;
+			});
+		}
+		contntBoxElement.appendChild(contentTextElement);
+
+		messagesDiv.appendChild(contntBoxElement);
+
 		messagesDiv.scrollTop = messagesDiv.scrollHeight;
 	}
+
+	// test.js内のsendMessage関数を1つに統一
 	function sendMessage() {
 		if (socket && socket.readyState === WebSocket.OPEN) {
 			let message = messageInput.value.trim();
@@ -82,17 +139,14 @@ document.addEventListener('DOMContentLoaded', function() {
 			appendMessage("システム: サーバーに接続されていません。");
 		}
 	}
-	window.sendMessage = function() {
-		if (socket && socket.readyState === WebSocket.OPEN) {
-			let message = messageInput.value.trim();
-			if (message) {
-				socket.send(message);
-				messageInput.value = '';
-			}
-		} else {
-			appendMessage("システム: サーバーに接続されていません。");
-		}
-	};
+
+	// グローバルスコープのsendMessage関数を削除し、上記の関数を使用
+	window.sendMessage = sendMessage;
+
+
+	function appendMessage(message){
+		console.log(message);
+	}
 
 	messageInput.addEventListener('keypress', function(e) {
 		if (e.key === 'Enter') {

@@ -2,7 +2,8 @@
 let threadId = document.querySelector('input[name="id"]').value;
 
 // JSONファイルをfetchで取得
-fetch(`${threadId}.json`)
+fetch(`./json/json${threadId}.json`)
+//fetch(`./json/json2.json`)
 	.then(response => response.json())  // レスポンスをJSONに変換
 	.then(jsonData => {
 		// タイムスタンプを日付形式に変換する関数
@@ -17,47 +18,56 @@ fetch(`${threadId}.json`)
 		// タイトルと作成時間を挿入
 		const titleElement = document.createElement('h1');
 		titleElement.className = 'title';
-		titleElement.textContent = jsonData.name;
+		titleElement.textContent = jsonData.title;
 		outputDiv.appendChild(titleElement);
 
 		const createTimeElement = document.createElement('h2');
 		createTimeElement.className = 'title';
-//		createTimeElement.textContent = formatDate(jsonData.createTime);
+		//		createTimeElement.textContent = formatDate(jsonData.createTime);
 		createTimeElement.textContent = jsonData.createTime;
 
 		outputDiv.appendChild(createTimeElement);
 
 		// コンテンツを挿入
 		jsonData.contents.forEach(content => {
+			const contntBoxElement = document.createElement('div')
+			contntBoxElement.className = "content-box"
+
 			const contentIdElement = document.createElement('p');
-			contentIdElement.className = 'contents';
+			contentIdElement.className = 'id';
 			contentIdElement.textContent = `ID: ${content.id}`;
-			outputDiv.appendChild(contentIdElement);
+			contntBoxElement.appendChild(contentIdElement);
 
 			const userNameElement = document.createElement('p');
-			userNameElement.className = 'contents';
+			userNameElement.className = 'userName';
 			userNameElement.textContent = `ユーザー名: ${content.userName}`;
-			outputDiv.appendChild(userNameElement);
+			contntBoxElement.appendChild(userNameElement);
 
 			const postingTimeElement = document.createElement('p');
-			postingTimeElement.className = 'contents';
+			postingTimeElement.className = 'time';
 			postingTimeElement.textContent = `投稿時間: ${content.postingTime}`;
-			outputDiv.appendChild(postingTimeElement);
+			contntBoxElement.appendChild(postingTimeElement);
 
 			const contentTextElement = document.createElement('p');
-			contentTextElement.className = 'contents';
+			contentTextElement.className = 'content';
 			contentTextElement.textContent = `内容: ${content.content}`;
 
-			// タグに従ってスタイルを追加
-			content.tags.forEach(tag => {
-				let cssProperty = tag.tag;
-				if (cssProperty === 'font-color') {
-					cssProperty = 'color'; // font-color を color に変換
-				}
-				contentTextElement.style[cssProperty] = tag.value;
-			});
 
-			outputDiv.appendChild(contentTextElement);
+			if (content.option != null) {
+
+				// タグに従ってスタイルを追加
+				content.tags.forEach(tag => {
+					let cssProperty = tag.tag;
+					if (cssProperty === 'font-color') {
+						cssProperty = 'color'; // font-color を color に変換
+					}
+					contentTextElement.style[cssProperty] = tag.value;
+				});
+			}
+
+			contntBoxElement.appendChild(contentTextElement);
+
+			outputDiv.appendChild(contntBoxElement);
 		});
 	})
 	.catch(error => {
