@@ -14,13 +14,7 @@ public class ThreadDto {
         tags = new ArrayList<String>();
     }
     
-    public ThreadDto(String id, String title, Timestamp createTime) {
-        this.id = id;
-        this.title = title;
-        this.createTime = createTime;
-        contentList = new ArrayList<ContentDto>();
-        tags = new ArrayList<String>();
-    }
+
     private String id;
     private String title;
     private List<String> tags;
