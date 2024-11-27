@@ -74,13 +74,18 @@ document.addEventListener('DOMContentLoaded', function() {
 			return null;
 		}
 	}
-
+	// タイムスタンプを日付形式に変換する関数
+	function formatDate(timestamp) {
+		const date = new Date(timestamp);
+		return date.toLocaleString();
+	}
 
 	function appendContent(message) {
 		console.log("アペンド開始")
 
 		const contntBoxElement = document.createElement('div')
 		contntBoxElement.className = "content-box"
+		contntBoxElement.id = "contentId-" + message.id;
 
 		const contentIdElement = document.createElement('p');
 		contentIdElement.className = 'id';
@@ -94,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		const postingTimeElement = document.createElement('p');
 		postingTimeElement.className = 'time';
-		postingTimeElement.textContent = `投稿時間: ${message.postingTime}`;
+		postingTimeElement.textContent = `投稿時間: ${formatDate(message.postingTime)}`;
 		contntBoxElement.appendChild(postingTimeElement);
 
 		const contentTextElement = document.createElement('p');
@@ -119,6 +124,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		messagesDiv.appendChild(contntBoxElement);
 
 		messagesDiv.scrollTop = messagesDiv.scrollHeight;
+		document.documentElement.scrollTop = messagesDiv.scrollHeight;
+		console.log(messagesDiv.scrollTop + " * " + messagesDiv.scrollHeight)
 	}
 
 	// test.js内のsendMessage関数を1つに統一
@@ -144,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	window.sendMessage = sendMessage;
 
 
-	function appendMessage(message){
+	function appendMessage(message) {
 		console.log(message);
 	}
 

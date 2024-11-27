@@ -59,4 +59,14 @@
     <servlet-name>UserCookieServlet</servlet-name>
     <url-pattern>/UserCookieServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ThreadServlet</display-name>
+    <servlet-name>ThreadServlet</servlet-name>
+    <servlet-class>servlet.ThreadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ThreadServlet</servlet-name>
+    <url-pattern>/ThreadServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

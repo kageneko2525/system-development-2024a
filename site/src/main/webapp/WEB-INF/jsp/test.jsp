@@ -15,6 +15,7 @@
     <meta name="description" content="リアルタイムWebSocketチャットアプリケーション">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="./css/test.css" type="text/css">
+    <link rel="stylesheet" href="./css/thread.css" type="text/css">
     <title>多対多チャット</title>
 </head>
 <body>

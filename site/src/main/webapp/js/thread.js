@@ -3,7 +3,7 @@ let threadId = document.querySelector('input[name="id"]').value;
 
 // JSONファイルをfetchで取得
 fetch(`./json/json${threadId}.json`)
-//fetch(`./json/json2.json`)
+	//fetch(`./json/json2.json`)
 	.then(response => response.json())  // レスポンスをJSONに変換
 	.then(jsonData => {
 		// タイムスタンプを日付形式に変換する関数
@@ -22,16 +22,19 @@ fetch(`./json/json${threadId}.json`)
 		outputDiv.appendChild(titleElement);
 
 		const createTimeElement = document.createElement('h2');
-		createTimeElement.className = 'title';
+		createTimeElement.className = 'time';
 		//		createTimeElement.textContent = formatDate(jsonData.createTime);
 		createTimeElement.textContent = jsonData.createTime;
 
 		outputDiv.appendChild(createTimeElement);
+		
+		if (jsonData.contents && Array.isArray(jsonData.contents) && jsonData.contents.length > 0) {
 
 		// コンテンツを挿入
 		jsonData.contents.forEach(content => {
 			const contntBoxElement = document.createElement('div')
 			contntBoxElement.className = "content-box"
+			contntBoxElement.id = "contentId-" + message.id;
 
 			const contentIdElement = document.createElement('p');
 			contentIdElement.className = 'id';
@@ -45,7 +48,7 @@ fetch(`./json/json${threadId}.json`)
 
 			const postingTimeElement = document.createElement('p');
 			postingTimeElement.className = 'time';
-			postingTimeElement.textContent = `投稿時間: ${content.postingTime}`;
+			postingTimeElement.textContent = `投稿時間: ${formatDate(content.postingTime)}`;
 			contntBoxElement.appendChild(postingTimeElement);
 
 			const contentTextElement = document.createElement('p');
@@ -68,7 +71,10 @@ fetch(`./json/json${threadId}.json`)
 			contntBoxElement.appendChild(contentTextElement);
 
 			outputDiv.appendChild(contntBoxElement);
+
+			document.documentElement.scrollTop = outputDiv.scrollHeight;
 		});
+		}
 	})
 	.catch(error => {
 		console.error('Error fetching JSON data:', error);

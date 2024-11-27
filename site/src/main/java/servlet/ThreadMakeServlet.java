@@ -83,6 +83,7 @@ public class ThreadMakeServlet extends HttpServlet {
 		//いったんテストへ飛ばして。そのうちthread.jspにする予定。
 		
 		
+		
 //		// データをリクエスト属性にセットして、JSPに渡す
 //		request.setAttribute("threadName", threadName);
 //		request.setAttribute("tagsList", tagsList);
@@ -93,8 +94,12 @@ public class ThreadMakeServlet extends HttpServlet {
 		
 		
 
-		
-		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 //		 テスト用のJSPに転送
 		request.getRequestDispatcher("/WEB-INF/jsp/test.jsp").forward(request, response);
 		

@@ -90,7 +90,7 @@ public class Thread {
 			sessionUserMap.put(session, new UserInfo(userId, "User-" + userId));
 
 			// 入室メッセージをブロードキャスト
-			broadcastMessage(room, "システム", sessionUserMap.get(session).displayName + "が入室しました。");
+//			broadcastMessage(room, "システム", sessionUserMap.get(session).displayName + "が入室しました。");
 
 			// ログ出力
 			System.out.println("新しい接続: " + session.getId() + " in room: " + room + " userId: " + userId);
@@ -141,7 +141,9 @@ public class Thread {
 		} catch (Exception e) {
 			System.err.println("メッセージ処理エラー: " + e.getMessage());
 		}
-
+		contentDto.setUserId(null);
+		
+		
 		// メッセージをルーム内の全員にブロードキャスト
 		broadcastMessage(room, sessionUserMap.get(session).displayName,jsonLogic.changeContentDtoToObjectNode(contentDto).toString() );
 	}
