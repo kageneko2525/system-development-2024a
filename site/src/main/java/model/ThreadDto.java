@@ -6,7 +6,7 @@ public class ThreadDto {
     public ThreadDto() {
         contentList = new ArrayList<ContentDto>();
     }
-    public ThreadDto(String id, String title, String createTime) {
+    public ThreadDto(String id, String title, Timestamp createTime) {
         this.id = id;
         this.title = title;
         //this.createTime = createTime;

@@ -21,15 +21,18 @@ public class JsonLogic {
 	//jsonの生成
 	public void createJson(String id, String title, Timestamp time, ArrayList<String> tags) {
 
-		//Timestamp→String
+
 		//いったんなしで
 		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		//String ConvertedTime = sdf.format(time);
 
+
 		ObjectMapper mapper = new ObjectMapper();
+
 
 		//ThreadDto threadDto = new ThreadDto(id, title, ConvertedTime);
 		ThreadDto threadDto = new ThreadDto(id, title, time);
+
 
 		try {
 			//タグが存在する場合、タグをセット
