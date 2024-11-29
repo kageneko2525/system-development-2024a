@@ -9,6 +9,7 @@ public class Profile {
     private int publicName;
     private int publicBirth;
     private int publicDisplay;
+    private int publicComment;
 
     // GetterとSetter
     public String getUserId() {
@@ -74,4 +75,12 @@ public class Profile {
     public void setPublicDisplay(int publicDisplay) {
         this.publicDisplay = publicDisplay;
     }
+
+	public int getPublicComment() {
+		return publicComment;
+	}
+
+	public void setPublicComment(int publicComment) {
+		this.publicComment = publicComment;
+	}
 }
