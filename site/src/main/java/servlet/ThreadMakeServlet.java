@@ -9,12 +9,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
+import dao.ThreadDao;
+import dao.ThreadTagDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.JsonLogic;
+import model.ThreadDto;
 
 /**
  * Servlet implementation class ThreadMakeServlet
@@ -55,9 +58,9 @@ public class ThreadMakeServlet extends HttpServlet {
 
 //		 //tagsListは選択されたタグ、threadNameはスレッド名。これらを使ってJSONファイル作成
 //		 //最新のスレッドidを取得する　変数はthred_no
-//		ThreadMakeDao th = new ThreadMakeDao();
-//		threadNo = th.findLatestThread();
-//		threadNo ++;
+		ThreadDao th = new ThreadDao();
+		threadNo = th.findLatestThread();
+		threadNo++;
 		
 		//DB登録のためこちら側で時刻取得
 		Date date = new Date();
@@ -76,8 +79,15 @@ public class ThreadMakeServlet extends HttpServlet {
 
 		//DB側に登録
 		//登録項目はthreadNo(スレッドID),threadName(スレッドの名前),threadUrl(スレッドのパス),timestamp(スレッドの生成時間),threadState(スレッドの状態)
-//		th.newCreateThread(threadNo, threadName, threadUrl, timestamp, threadState);
+		th.newCreateThread(threadNo, threadName, threadUrl, timestamp, threadState);
 
+		
+		
+		ThreadDto threadDto = new ThreadDto(Integer.toString(threadNo), threadName,tagsList,timestamp);
+		
+		
+		ThreadTagDao threadTagDao = new ThreadTagDao();
+		threadTagDao.setTag(threadDto);
 		
 		//どこにとばせばええですか
 		//いったんテストへ飛ばして。そのうちthread.jspにする予定。
@@ -89,10 +99,9 @@ public class ThreadMakeServlet extends HttpServlet {
 //		request.setAttribute("tagsList", tagsList);
 //		
 //		
-		//threadIDを渡すためのリクエストスコープ
-		request.setAttribute("id", threadNo);
+		//threadIDを渡すためのセッションスコープ
 		
-		
+		request.getSession().setAttribute("threadId", threadNo);
 
 		try {
 			Thread.sleep(1000);
@@ -100,8 +109,9 @@ public class ThreadMakeServlet extends HttpServlet {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-//		 テスト用のJSPに転送
-		request.getRequestDispatcher("/WEB-INF/jsp/test.jsp").forward(request, response);
+		
+//		 threadServletに送信
+		response.sendRedirect(request.getContextPath() + "/ThreadServlet");
 		
 
 	}
