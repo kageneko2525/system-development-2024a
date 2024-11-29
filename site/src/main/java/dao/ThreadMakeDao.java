@@ -56,7 +56,7 @@ public class ThreadMakeDao extends BaseDao {
 	 * @return 
 	 */
 	public void newCreateThread(int threadNo,String threadName,String threadUrl,Timestamp threadTime,int threadState) {		
-
+		System.out.println("DB Thread登録");
 		try {
 
 			this.connect();
