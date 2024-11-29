@@ -26,6 +26,7 @@ import jakarta.websocket.server.ServerEndpoint;
 /**
  * WebSocketエンドポイントを定義するクラス
  * パスパラメータとして'room'を受け取り、各ルームごとのチャット機能を提供する
+ * roomはスレッドのIDとなっていてIDごとにWebsocketのエンドポイントができるイメージ
  */
 @ServerEndpoint("/Thread/{room}")
 public class Thread {
@@ -67,6 +68,10 @@ public class Thread {
 	public void onOpen(Session session, @PathParam("room") String room) {
 		try {
 			// クエリパラメータからユーザーIDを取得（nullの場合は新規生成）
+			//クエリパラメータなのでWebsocket接続時URLの語尾にuserIdを送信してるよ
+			//現状なりすましが容易にできてしまうのでそこをどうするか悩んでいるよ
+			//解決するにはそのユーザー限定の秘密鍵みたいなものをpostで送信すればなんとかなるかも
+			//それかcookieで実装すればいいかも
 			String userId = null;
 			Map<String, List<String>> params = session.getRequestParameterMap();
 			if (params != null && params.containsKey("userId")) {
@@ -125,7 +130,7 @@ public class Thread {
 			// メッセージデータを取得
 			String threadId = jsonNode.get("threadId").asText();
 			String userId = jsonNode.get("userId").asText();
-			String userName = null;
+			String userName = "名無し";
 			String messageText = jsonNode.get("message").asText();
 
 			// 現在のタイムスタンプを生成
