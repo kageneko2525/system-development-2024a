@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+.content-box {
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.content-box p {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.content-box .id {
+  color: #666666;
+  font-size: 0.9em;
+}
+
+.content-box .userName {
+  font-weight: bold;
+  color: #333333;
+}
+
+.content-box .time {
+  color: #888888;
+  font-size: 0.85em;
+}
+
+.content-box .content {
+  margin-top: 12px;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+#messages {
+  max-width: 800px;
+  padding: 20px;
+}
+
+.title {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eaeaea;
+}
+
+.time {
+  font-size: 1.2em;
+  color: #666666;
+  margin-bottom: 30px;
+  font-weight: normal;
+}

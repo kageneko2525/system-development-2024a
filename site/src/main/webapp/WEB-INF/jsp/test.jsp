@@ -1,3 +1,5 @@
+<% //test.jsp %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, java.net.URLEncoder" %>
 <% 
@@ -13,6 +15,7 @@
     <meta name="description" content="リアルタイムWebSocketチャットアプリケーション">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="./css/test.css" type="text/css">
+    <link rel="stylesheet" href="./css/thread.css" type="text/css">
     <title>多対多チャット</title>
 </head>
 <body>
@@ -57,6 +60,9 @@
         </div>
     </div>
 
-    <script src="./js/test.js"></script>
+
+    <script src="./js/thread.js"></script>
+    <script defer src="./js/test.js"></script>
+    
 </body>
 </html>

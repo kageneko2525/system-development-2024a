@@ -5,20 +5,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import model.ThreadDto;
 
-/**
- * 
- *@author x22u004
- */
-public class ThreadMakeDao extends BaseDao {
-
+public class ThreadDao extends BaseDao {
 	/**
 	 * 最新のスレッドIDを検索
 	 * @param ThreadNumber int型
 	 * @return 最新のスレッドIDをint型で返す
+	 * @author x22u004
 	 */
 	public int findLatestThread() {
-	    int thread_id = 1; // デフォルト値を1に設定
+	    int thread_id = 0; // デフォルト値を0に設定
 
 	    try {
 	        this.connect();
@@ -47,12 +44,13 @@ public class ThreadMakeDao extends BaseDao {
 	        }
 	    }
 
-	    return thread_id; // データがなかった場合はデフォルト値1を返す
+	    return thread_id; // データがなかった場合はデフォルト値0を返す
 	}
 
 	
 	/**
-	 * 新しいスレッドをDB登録
+	 * 新しいスレッドをDB登録	
+	 * @author x22u004
 	 * @return 
 	 */
 	public void newCreateThread(int threadNo,String threadName,String threadUrl,Timestamp threadTime,int threadState) {		
@@ -93,8 +91,52 @@ public class ThreadMakeDao extends BaseDao {
 
 			}
 		}
-
-		
 	}
+	
+	
+	
+	
 
+	
+	public void newCreateThread(ThreadDto threadDto) {		
+		System.out.println("DB Thread登録");
+		try {
+
+			this.connect();
+
+			String sql = "INSERT INTO thread(thread_id,thread_name,thread_url,thread_make,thread_state) VALUES(?,?,?,?,?);";
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, Integer.parseInt(threadDto.getId()));
+			ps.setString(2, threadDto.getTitle());
+			ps.setString(3, "");
+			ps.setTimestamp(4, threadDto.getCreateTime());
+			ps.setInt(5, 0);
+			
+			ps.executeUpdate();
+			
+			ps.close();
+
+			
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+				
+				this.disConnect();
+				
+
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+
+			}
+		}
+	}
+	
+	
 }
