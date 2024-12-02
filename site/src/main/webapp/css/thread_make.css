@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    padding: 20px;
+  }
+  
+  .form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  label, fieldset {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  fieldset {
+    border: none;
+    padding: 0;
+  }
+  
+  input[type="text"], button {
+    padding: 8px;
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  #tagsContainer {
+    margin-bottom: 20px;
+  }
+  
+  #selectedTags {
+    display: flex; /* タグを横並びにするためにフレックスボックスを使用 */
+    flex-wrap: wrap; /* タグが多くなったら折り返す */
+    background-color: #e0e0e0;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .tag {
+    background-color: #3498db;
+    color: white;
+    padding: 5px 10px;
+    margin: 5px; /* タグ同士の間に少し余白を追加 */
+    border-radius: 4px;
+    display: inline-flex; /* タグを横並びにし、「×」ボタンも横に配置 */
+    align-items: center; /* 「×」ボタンをタグの中央に揃える */
+    writing-mode: horizontal-tb; /* 横書きに強制 */
+    text-orientation: mixed; /* 文字の向きを自然に */
+    white-space: nowrap; /* テキストが改行されないようにする */
+  }
+  
+  .tag button {
+    background: none;
+    border: none;
+    color: white;
+    margin-left: 8px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  
+  
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+  }
+  
+  a {
+    color: #007bff;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }

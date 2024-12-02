@@ -19,4 +19,54 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>threadForm</display-name>
+    <servlet-name>threadForm</servlet-name>
+    <servlet-class>servlet.threadForm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>threadForm</servlet-name>
+    <url-pattern>/threadForm</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoginServlet</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>model.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ThreadMakeServlet</display-name>
+    <servlet-name>ThreadMakeServlet</servlet-name>
+    <servlet-class>servlet.ThreadMakeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ThreadMakeServlet</servlet-name>
+    <url-pattern>/ThreadMakeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserCookieServlet</display-name>
+    <servlet-name>UserCookieServlet</servlet-name>
+    <servlet-class>servlet.UserCookieServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserCookieServlet</servlet-name>
+    <url-pattern>/UserCookieServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ThreadServlet</display-name>
+    <servlet-name>ThreadServlet</servlet-name>
+    <servlet-class>servlet.ThreadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ThreadServlet</servlet-name>
+    <url-pattern>/ThreadServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
