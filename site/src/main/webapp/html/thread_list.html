@@ -1,58 +1,65 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>thread_list</title>
-    <link rel="stylesheet" href="../css/thread_list.css" type="text/css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>thread_list</title>
+	<link rel="stylesheet" href="../css/thread_list.css" type="text/css">
 </head>
+
 <body>
-    <div class="container">
-        <!-- 並べ替えボタン -->
-        <div class="sort-dropdown">
-          <select id="sort-select">
-            <option value="new" selected>新着順</option>
-            <option value="activity">勢い順</option>
-            <option value="popularity">人気順</option>
-          </select>
-        </div>
-      
-        <!-- スレッド作成ボタン -->
-        <button class="create-thread-button">スレッド作成</button>
-      
-        <!-- スレッド一覧 -->
-        <div class="thread-list" id="thread-list">
-          <div class="thread-item" data-date="2024-10-31" data-activity="10">
-            <p class="thread-tag">#タグ1</p>
-            <p class="thread-title"><a href="サーブレットURL?id=1">スレッドタイトル1</a></p>
-            <p class="thread-date">投稿日: 2024/10/31</p>
-            <p class="thread-update">更新日: 2024/10/31</p>
-            <p class="thread-activity">勢い: 10 sec</p>
-          </div>
-          <div class="thread-item" data-date="2024-10-30" data-activity="20">
-            <p class="thread-tag">#タグ2</p>
-            <p class="thread-title"><a href="サーブレットURL?id=2">スレッドタイトル2</a></p>
-            <p class="thread-date">投稿日: 2024/10/30</p>
-            <p class="thread-update">更新日: 2024/10/30</p>
-            <p class="thread-activity">勢い: 20 sec</p>
-          </div>
-          <div class="thread-item" data-date="2024-10-2" data-activity="20">
-            <p class="thread-tag">#タグ3</p>
-            <p class="thread-title"><a href="サーブレットURL?id=3">スレッドタイトル3</a></p>
-            <p class="thread-date">投稿日: 2024/10/30</p>
-            <p class="thread-update">更新日: 2024/10/30</p>
-            <p class="thread-activity">勢い: 50 sec</p>
-          </div>
-          <div class="thread-item" data-date="2024-10-10" data-activity="20">
-            <p class="thread-tag">#タグ4</p>
-            <p class="thread-title"><a href="サーブレットURL?id=4">スレッドタイトル4</a></p>
-            <p class="thread-date">投稿日: 2024/10/30</p>
-            <p class="thread-update">更新日: 2024/10/30</p>
-            <p class="thread-activity">勢い: 30 sec</p>
-          </div>
-          <!-- 追加のスレッド項目も同様に設定 -->
-        </div>
-      </div>      
-      <script src="../js/thread_list.js"></script>
+	<div class="container">
+		<!-- 並べ替えボタン -->
+		<div class="sort-dropdown">
+			<select id="sort-select" onchange="selectSort()">
+				<option value="new" selected>新着順</option>
+				<option value="activity">勢い順</option>
+				<option value="popularity">人気順</option>
+			</select>
+		</div>
+
+		<!-- スレッド作成ボタン -->
+		<button class="create-thread-button">スレッド作成</button>
+
+		<label><input type="radio" name="select-search" id="select-tag" checked>タグ検索 </label>
+		<label><input type="radio" name="select-search" id="select-title">タイトル検索</label>
+
+		<input type="text" id="search-box">
+		<!-- スレッド一覧 -->
+		<div class="thread-list" id="thread-list">
+			<div class="thread-item" data-date="2024-10-31" data-activity="10">
+				<p class="thread-tag">#タグ1</p>
+				<p class="thread-title"><a href="サーブレットURL?id=1">スレッドタイトル1</a></p>
+				<p class="thread-date">投稿日: 2024/10/31</p>
+				<p class="thread-update">更新日: 2024/10/31</p>
+				<p class="thread-activity">勢い: 10 sec</p>
+			</div>
+			<div class="thread-item" data-date="2024-10-30" data-activity="20">
+				<p class="thread-tag">#タグ2</p>
+				<p class="thread-title"><a href="サーブレットURL?id=2">スレッドタイトル2</a></p>
+				<p class="thread-date">投稿日: 2024/10/30</p>
+				<p class="thread-update">更新日: 2024/10/30</p>
+				<p class="thread-activity">勢い: 20 sec</p>
+			</div>
+			<div class="thread-item" data-date="2024-10-2" data-activity="20">
+				<p class="thread-tag">#タグ3</p>
+				<p class="thread-title"><a href="サーブレットURL?id=3">スレッドタイトル3</a></p>
+				<p class="thread-date">投稿日: 2024/10/30</p>
+				<p class="thread-update">更新日: 2024/10/30</p>
+				<p class="thread-activity">勢い: 50 sec</p>
+			</div>
+			<div class="thread-item" data-date="2024-10-10" data-activity="20">
+				<p class="thread-tag">#タグ4</p>
+				<p class="thread-title"><a href="サーブレットURL?id=4">スレッドタイトル4</a></p>
+				<p class="thread-date">投稿日: 2024/10/30</p>
+				<p class="thread-update">更新日: 2024/10/30</p>
+				<p class="thread-activity">勢い: 30 sec</p>
+			</div>
+			<!-- 追加のスレッド項目も同様に設定 -->
+		</div>
+	</div>
+	<script src="../js/thread_list.js"></script>
 </body>
+
 </html>
