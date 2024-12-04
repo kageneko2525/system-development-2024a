@@ -12,7 +12,7 @@ public class ThreadDto {
 	public ThreadDto(String id, String title, Timestamp createTime) {
 		this.id = id;
 		this.title = title;
-		//this.createTime = createTime;
+		this.createTime = createTime;
 		contentList = new ArrayList<ContentDto>();
 		tags = new ArrayList<String>();
 	}
@@ -20,7 +20,7 @@ public class ThreadDto {
 	public ThreadDto(String id, String title, ArrayList<String> tagsList, Timestamp createTime) {
 		this.id = id;
 		this.title = title;
-		//this.createTime = createTime;
+		this.createTime = createTime;
 		contentList = new ArrayList<ContentDto>();
 		tags = tagsList;
 	}
@@ -55,7 +55,7 @@ public class ThreadDto {
 		this.tags = tags;
 	}
 
-	public void addTags(String tag) {
+	public void addTag(String tag) {
 		this.tags.add(tag);
 	}
 
