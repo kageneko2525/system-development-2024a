@@ -33,14 +33,21 @@ public class ThreadServlet extends HttpServlet {
 		System.out.println(threadId);
 		// 必要な処理があればここで実行
 		if (threadId == null) {
-			response.sendRedirect(request.getContextPath());
+			threadId= Integer.parseInt(request.getParameter("threadId")) ;
 
+			request.setAttribute("id", threadId);
+
+			// test.jspに転送
+			request.getRequestDispatcher("/WEB-INF/jsp/test.jsp").forward(request, response);
+
+			 return;
 		} else {
 			// リクエストスコープにthreadIdを設定（すでにあるが明示的に再設定）
 			request.setAttribute("id", threadId);
 
 			// test.jspに転送
 			request.getRequestDispatcher("/WEB-INF/jsp/test.jsp").forward(request, response);
+			 return;
 		}
 
 	}
