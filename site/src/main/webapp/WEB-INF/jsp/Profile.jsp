@@ -20,7 +20,11 @@ String errorMessage = (String) request.getAttribute("errorMessage");
 		</div>
 		<div class="button-container">
 			<h1>プロフィール</h1>
-			<%
+			
+			<button class="report-button">通報</button>
+		</div>
+		<div style="display: flex; gap: 20px;">
+		<%
 			// エラーメッセージがある場合
 			if (errorMessage != null) {
 			%>
@@ -29,12 +33,7 @@ String errorMessage = (String) request.getAttribute("errorMessage");
 			// プロフィールがある場合
 			} else if (profile != null) {
 			%>
-			<button class="report-button">通報</button>
-		</div>
-		<div style="display: flex; gap: 20px;">
-			<img id="profile-icon"
-				src="https://www.chiba-fjb.ac.jp/www/img/staff/nomoto_01.jpg"
-				alt="プロフィール画像" class="profile-icon">
+			<img id="profile-icon" src="<%=profile.getUserIcon() %>" alt="プロフィール画像" class="profile-icon">
 			<div class="profile-info">
 				<p>
 					<b>名前:</b>
