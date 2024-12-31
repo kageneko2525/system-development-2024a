@@ -2,6 +2,7 @@ package model;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 import dao.UserDao;
 
@@ -65,6 +66,11 @@ public class SignupLogic {
 	        if (!isSuccess) {
 	            user = null;
 	        }
+	        
+	    } catch (SQLIntegrityConstraintViolationException e) {
+	    	// 重複エントリの例外をキャッチして処理
+	    	System.err.println("Duplicate entry: " + e.getMessage());
+	    	user = null;
 
 	    } catch (IllegalArgumentException e) {
 	        System.err.println("Invalid input: " + e.getMessage());
