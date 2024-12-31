@@ -1,39 +1,128 @@
-@charset "UTF-8";
-form {
-  text-align: center;
-  position: relative; /* 今の位置を基準 */
-top: 200px; /* 上から10px */
-}
-  h1 {
-  font-size: 3em; /* サイズを大きくする */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
- p {
-  font-size: 24px; /* フォントサイズを24pxに設定 */
-     margin-bottom: 0px; 
-     margin-right: 600px;
-     margin-left:0px;
-    }
+.login-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
 
-.login_form_btm {
-  padding: 20px 0;
-  margin: 10px 0;
-  line-height: 10px; 
+.signup-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
 }
 
 input {
-  width: 800px;
-  padding: 20px;
-  margin: 30px 0;
-  line-height: 5px; 
-   margin-top: 0px;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
 }
-button {
-            font-size: 20px; /* フォントサイズを20pxに設定 */
-            padding: 15px 30px; /* 内側の余白を設定（上下15px、左右30px） */
-            width: 200px; /* 幅を200pxに設定 */
-            height: 50px; /* 高さを50pxに設定 */
-            cursor: pointer; /* カーソルをポインタに変更 */
-            border-radius: 5px; /* 角を丸くする */
-            font-weight: bold; /* フォントを太字にする */
-        }
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.login-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 1rem;
+    display: none;
+}
+
+.signup-link {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+}
+
+.signup-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+.signup-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.signup-button:hover {
+    background-color: #218838;
+}
+
+.login-link {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+}
+
+.login-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
