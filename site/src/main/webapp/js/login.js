@@ -5,3 +5,4 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     const password = document.getElementById('password').value.trim();
     
 });
+

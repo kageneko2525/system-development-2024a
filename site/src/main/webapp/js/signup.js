@@ -5,3 +5,11 @@ document.getElementById('signupForm').addEventListener('submit', function(event)
     const password = document.getElementById('password').value.trim();
  
 });
+
+//エラーメッセージがあればアラートで表示
+window.onload = function() {
+	var errorMessage = "${errorMessage}";
+	if (errorMessage) {
+		alert(errorMessage);
+	}
+};
