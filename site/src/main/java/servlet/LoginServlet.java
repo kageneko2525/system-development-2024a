@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.LoginLogic;
-import model.SignupLogic;
 import model.User;
 
 /** ログイン用サーブレット
@@ -32,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("/site/html/index.html");
 		} else {
 			// セッションにユーザ情報がない場合、login.htmlにリダイレクト
-			response.sendRedirect(request.getContextPath() + "/site/html/login.html");
+			response.sendRedirect("/site/html/login.html");
 		}
 	}
 
@@ -42,11 +41,9 @@ public class LoginServlet extends HttpServlet {
 		String plainPassword = request.getParameter("password");
 		
 		LoginLogic loginLogic = new LoginLogic();
-		
-		// パスワードをハッシュ化
-	    String hashedPassword = SignupLogic.hashPassword(plainPassword);
 	    
-	    User user = loginLogic.loginUser(email, hashedPassword);
+	    //ログイン処理。失敗の場合は、nullのuserが戻り値
+	    User user = loginLogic.loginUser(email, plainPassword);
 	    
 	    if (user != null) {
 	    	HttpSession session = request.getSession(true); // 新しいセッションを作成

@@ -51,140 +51,100 @@ public class UserDao extends SampleDao{
 	    }
 	}
 
-	
+	//userテーブル
 	private void updateUserTable(Connection connection, User user) throws SQLException {
 		String sql = "INSERT INTO user (user_id , mail , ban_flag) VALUES (?,?,?);";
 		try (PreparedStatement ps = connection.prepareStatement(sql)) {
-			//idどうするか判断後
-			int id = Integer.parseInt(user.getId());
-			ps.setInt(1, id);
+			ps.setString(1, user.getId());
 			ps.setString(2, user.getMail());
 			ps.setInt(3, user.getBanFlg());
 			
 			ps.executeUpdate();
 		}
 	}
-	
+	//user_hashテーブル
 	private void updateUserHashTable(Connection connection, User user, String password) throws SQLException {
 		String sql = "INSERT INTO user_hash (user_id , hash) VALUES (?,?);";
 		try (PreparedStatement ps = connection.prepareStatement(sql)) {
-			//idどうするか判断後
-			int id = Integer.parseInt(user.getId());
-			ps.setInt(1, id);
+			ps.setString(1, user.getId());
 			ps.setString(2, password);
 			
 			ps.executeUpdate();
 		}
 	}
-	
-	/**
-	 * ログイン可否の判定
-	 */
-	  public User loginUser(String email, String hashedPassword) throws SQLException, ClassNotFoundException {
-	        User user = null;
-	        
-	        try {
-	            connect();
-	            con.setAutoCommit(false); // トランザクション開始
 
-	            // user_hashテーブルからuser_idを取得
-	            String userId = getUserIdByHashedPassword(hashedPassword);
-
-	            if (userId != null) {
-	                // userテーブルからユーザー情報を取得
-	                user = getUserById(userId);
-	            }
-
-	            con.commit(); // トランザクションをコミット
-
-	        } catch (SQLException | ClassNotFoundException e) {
-	            if (con != null) {
-	                con.rollback(); // エラーが発生した場合はロールバック
-	            }
-	            throw e;
-	        } finally {
-	            if (con != null) {
-	                con.setAutoCommit(true);
-	                disConnect();
-	            }
-	        }
-
-	        return user;
-	    }
-
-	    private String getUserIdByHashedPassword(String hashedPassword) throws SQLException {
-	        String userId = null;
-
-	        String sql = "SELECT user_id FROM user_hash WHERE hash = ?";
-	        try (PreparedStatement ps = con.prepareStatement(sql)) {
-	            ps.setString(1, hashedPassword);
-	            try (ResultSet rs = ps.executeQuery()) {
-	                if (rs.next()) {
-	                    userId = rs.getString("user_id");
-	                }
-	            }
-	        }
-
-	        return userId;
-	    }
-
-	    private User getUserById(String userId) throws SQLException {
-	        User user = null;
-
-	        String sql = "SELECT * FROM user WHERE user_id = ?";
-	        try (PreparedStatement ps = con.prepareStatement(sql)) {
-	            ps.setString(1, userId);
-	            try (ResultSet rs = ps.executeQuery()) {
-	                if (rs.next()) {
-	                    user = new User();
-	                    user.setId(rs.getString("user_id"));
-	                    user.setMail(rs.getString("mail"));
-	                    user.setBanFlg(rs.getInt("ban_flag"));
-	                }
-	            }
-	        }
-
-	        return user;
-	    }
-
-	
 
 	/**
-	 * 最新ユーザIDを帰す（連番のため）
-	 * @param int
+	 * ログイン処理 現在IDはメールアドレスを使用
 	 */
-	
-	public int findLatestUser() {
-	    int user_id = 0; // デフォルト値を0に設定
+	public User loginUser(String id, String hashedPassword) throws SQLException, ClassNotFoundException {
+	    User user = null;
 
 	    try {
-	        this.connect();
+	        connect();
+	        con.setAutoCommit(false); // トランザクション開始
 
-	        String sql = "SELECT user_id "
-	                   + "FROM user "
-	                   + "WHERE user_id = (SELECT MAX(user_id) FROM user);";
+	        // user_hashテーブルからuser_idを取得
+	        String userId = getUserIdByIdAndHashedPassword(id, hashedPassword);
 
-	        PreparedStatement ps = con.prepareStatement(sql);
-
-	        ResultSet rs = ps.executeQuery();
-
-	        if (rs.next()) {
-	            // データが存在する場合はその値を取得
-	            user_id = rs.getInt("user_id");
+	        if (userId != null) {
+	            // userテーブルからユーザー情報を取得
+	            user = getUserById(userId);
 	        }
 
-	    } catch (Exception e) {
-	        e.printStackTrace();
+	        con.commit(); // トランザクションをコミット
 
+	    } catch (SQLException | ClassNotFoundException e) {
+	        if (con != null) {
+	            con.rollback(); // エラーが発生した場合はロールバック
+	        }
+	        throw e;
 	    } finally {
-	        try {
-	            this.disConnect();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
+	        if (con != null) {
+	            con.setAutoCommit(true);
+	            disConnect();
 	        }
 	    }
 
-	    return user_id; // データがなかった場合はデフォルト値0を返す
+	    return user;
 	}
+	
+	private String getUserIdByIdAndHashedPassword(String id, String hashedPassword) throws SQLException {
+	    String userId = null;
+
+	    String sql = "SELECT user_id FROM user_hash WHERE user_id = ? AND hash = ?";
+	    try (PreparedStatement ps = con.prepareStatement(sql)) {
+	        ps.setString(1, id);
+	        ps.setString(2, hashedPassword);
+	        try (ResultSet rs = ps.executeQuery()) {
+	            if (rs.next()) {
+	                userId = rs.getString("user_id");
+	            }
+	        }
+	    }
+
+	    return userId;
+	}
+
+	private User getUserById(String userId) throws SQLException {
+	    User user = null;
+
+	    String sql = "SELECT * FROM user WHERE user_id = ?";
+	    try (PreparedStatement ps = con.prepareStatement(sql)) {
+	        ps.setString(1, userId);
+	        try (ResultSet rs = ps.executeQuery()) {
+	            if (rs.next()) {
+	                user = new User();
+	                user.setId(rs.getString("user_id"));
+	                user.setMail(rs.getString("mail"));
+	                user.setBanFlg(rs.getInt("ban_flag"));
+	            }
+	        }
+	    }
+
+	    return user;
+	}
+	
+	
 
 }

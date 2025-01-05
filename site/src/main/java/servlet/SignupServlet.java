@@ -25,11 +25,8 @@ public class SignupServlet extends HttpServlet {
 
 	    SignupLogic signuplogic = new SignupLogic();
 
-	    // パスワードをハッシュ化
-	    String hashedPassword = SignupLogic.hashPassword(plainPassword);
-
-	    // DBへ登録
-	    User user = signuplogic.signup(email, hashedPassword);
+	    // 登録処理
+	    User user = signuplogic.signup(email, plainPassword);
 
 	    if (user == null) {
 	        // userがnullの場合、signup.htmlに戻してエラーメッセージ表示（登録失敗）

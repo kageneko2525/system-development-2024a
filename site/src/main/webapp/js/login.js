@@ -1,8 +1,13 @@
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // フォームのデフォルトの送信動作を防止
+// エラーメッセージがあればアラートで表示
+function getParameterByName(name) {
+    const url = new URL(window.location.href);
+    const param = url.searchParams.get(name);
+    console.log("Param: ", param); // デバッグメッセージ
+    return param ? decodeURIComponent(param.replace(/\+/g, ' ')) : null;
+}
 
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
-    
-});
-
+const errorMessage = getParameterByName('error');
+console.log("Error Message: ", errorMessage); // デバッグメッセージ
+if (errorMessage) {
+    alert(errorMessage);
+}
