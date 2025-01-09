@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+body {
+    margin: 0;
+}
+
+header {
+    background-color: orange;
+    margin: 0px;
+    padding: 0px;
+    padding-left: 5%;
+}
+
+.header_box {
+    display: flex;
+    width: 100%;
+}
+
+.header_logo {
+    width: 20%;
+}
+
+.header_search {
+    margin: auto;
+}
+
+.header_search form input {
+    padding: 7% 15%;
+}
+
+::placeholder {
+    text-align: center;
+    
+}
+
+.header_login_btn {
+    width: 6ch;
+    height: 6ch;
+    border: 1px black solid;
+    margin: auto;
+    margin-right: 20%;
+}
