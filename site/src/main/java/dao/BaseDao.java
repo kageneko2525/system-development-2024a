@@ -12,7 +12,8 @@ public class BaseDao {
 
 	// 接続文字列
 	//db名はsuperChat
-	private static final String URL = "jdbc:mysql://localhost:3306/sys";
+
+	private static final String URL = "jdbc:mysql://localhost:3306/superchat";
 	private static final String USER = "root";
 	private static final String PASSWORD = "";
 	

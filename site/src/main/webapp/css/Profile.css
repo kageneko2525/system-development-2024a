@@ -1,0 +1,42 @@
+.right {
+	text-align: end;
+}
+
+.profile-icon {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	margin: 5vw 0 0 10vw;
+}
+
+.button-container {
+	display: flex;
+	align-items: center;
+}
+
+h1 {
+	flex-grow: 1;
+	text-align: center;
+	margin: 0;
+}
+
+.report-button {
+	font-size: 16px;
+	padding: 5px 10px;
+	cursor: pointer;
+	margin-right: 10vw;
+}
+
+.close-button {
+	margin: 0 0 0 auto;
+	font-size: 42px;
+	color: #333;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+#user-birth-container,
+#user-comment-container {
+	display: none;
+}
