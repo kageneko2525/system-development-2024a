@@ -69,4 +69,14 @@
     <servlet-name>ThreadServlet</servlet-name>
     <url-pattern>/ThreadServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ThreadListServlet</display-name>
+    <servlet-name>ThreadListServlet</servlet-name>
+    <servlet-class>servlet.ThreadListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ThreadListServlet</servlet-name>
+    <url-pattern>/ThreadListServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -21,6 +21,8 @@ fetch(`./json/json${threadId}.json`)
 		titleElement.textContent = jsonData.title;
 		outputDiv.appendChild(titleElement);
 
+		console.log(jsonData)
+
 		const createTimeElement = document.createElement('h2');
 		createTimeElement.className = 'time';
 		//		createTimeElement.textContent = formatDate(jsonData.createTime);
@@ -34,8 +36,7 @@ fetch(`./json/json${threadId}.json`)
 		jsonData.contents.forEach(content => {
 			const contntBoxElement = document.createElement('div')
 			contntBoxElement.className = "content-box"
-			contntBoxElement.id = "contentId-" + message.id;
-
+			contntBoxElement.id = "contentId-" + content.id;
 			const contentIdElement = document.createElement('p');
 			contentIdElement.className = 'id';
 			contentIdElement.textContent = `ID: ${content.id}`;

@@ -16,7 +16,9 @@ public class ContentDto {
         this.content = content ;
         optionList = new ArrayList<OptionDto>();        
     }
-    
+
+
+
     public ContentDto(int id , String userId ,String userName ,Timestamp postingTime,String content,ArrayList<OptionDto> optionList){
         this.id =id;
         this.userId = userId;
@@ -26,8 +28,12 @@ public class ContentDto {
         this.optionList = optionList;        
     }
     
+
     
     
+
+
+
     private int id;
     private String userId;
     private String userName;

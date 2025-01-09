@@ -1,7 +1,9 @@
 package model;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+
 public class ThreadDto {
     public ThreadDto() {
         contentList = new ArrayList<ContentDto>();
@@ -44,7 +46,7 @@ public class ThreadDto {
     public void setTags(List<String> tags) {
         this.tags = tags;
     }
-    public void addTags(String tag){
+    public void addTag(String tag){
         this.tags.add(tag);
     }
     public Timestamp getCreateTime() {
@@ -70,4 +72,5 @@ public class ThreadDto {
         contentList.forEach(s -> s.printContent());
         
     }
+
 }
