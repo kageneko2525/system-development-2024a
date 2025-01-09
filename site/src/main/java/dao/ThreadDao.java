@@ -163,6 +163,8 @@ public List<ThreadDto> getThreadTitleSortNew(String title,int count,int offset,i
 	public void newCreateThread(int threadNo, String threadName, String threadUrl, Timestamp threadTime,
 			int threadState) {
 		System.out.println("DB Thread登録");
+		System.out.println("URL length: " + threadUrl.length());
+		System.out.println("URL: " + threadUrl);
 		try {
 
 			this.connect();

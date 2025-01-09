@@ -111,7 +111,7 @@ public class ThreadMakeServlet extends HttpServlet {
 		}
 		
 //		 threadServletに送信
-		response.sendRedirect(request.getContextPath() + "/ThreadServlet");
+		response.sendRedirect(request.getContextPath() + "/ThreadServlet"+"?threadId="+threadNo);
 		
 
 	}
