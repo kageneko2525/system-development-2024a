@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./../css/report.css">
+    <title>Super Chat</title>
+</head>
+
+<div>
+	<div id="overlayComplete"></div>
+    <div id="successPopup">
+		<h2>送信が完了しました。</h2>
+		<p>ご協力ありがとうございました。</p>
+		<button onclick="closePopup()">閉じる</button>
+	</div>
+	
+    <!-- input要素の配置は、ポップアップ部分より前にする -->
+    <input type="checkbox" id="popup" style="display: none;">
+    
+    <div id="window">
+		<label for="="popup" id="bg_gray">
+		<span></span>
+		</label>	
+	</div>
+    
+    
+
+    <!-- ポップアップ部分 -->
+    <div id="overlay">
+        <label for="popup" id="bg_gray"></label> <!-- ウィンドウの外のグレーの領域 -->
+
+        <div id="window"> <!-- ウィンドウ部分 -->
+            <label for="popup" id="btn_cloth"> <!-- 閉じるボタン -->
+                <span></span>
+            </label>
+
+            <!-- ウィンドウのコンテンツ -->
+            <center>
+                <h2>通報</h2>
+            </center>
+            <p>ユーザーを通報する理由として当てはまるものを以下から選択してください。</p>
+            <br method="GET">
+				<label for="choice"><input type="radio" name="report" value="user">ユーザーに対して</label>
+				<label for="choice"><input type="radio" name="report" value="thread">書き込みに対して</label>
+				<label for="choice"><input type="radio" name="report" value="thread_name">スレッド名に対して</label><br>
+				<p></p><br>
+                <label><input type="checkbox" name="reason" value="spam"> スパム</label><br>
+                <label><input type="checkbox" name="reason" value="Harassment"> 嫌がらせ・ハラスメント</label><br>
+                <label><input type="checkbox" name="reason" value="inappropriate"> 暴力的または不適切なコンテンツ</label><br>
+                <label><input type="checkbox" name="reason" value="privacy"> 個人情報の公開</label><br>
+                <label><input type="checkbox" name="reason" value="infringement"> 著作権侵害</label><br>
+                <label><input type="checkbox" name="reason" value="hate"> 差別やヘイトスピーチ</label><br>
+                <label><input type="checkbox" name="reason" value="other"> その他</label><br>
+                <textarea class="text" placeholder="詳細を入力してください。" style="width: 100%; height: 150px;"></textarea>
+                <input type="file" name="example" accept="image/*" placeholder="IDを入力">
+                <p><input type="submit" value="送信" id="button2"></p>
+            </form>
+        </div>
+    </div>
+
+    <div class="box">
+        <p>
+            <font size="20"><label for="popup" id="txt_label">通報</label></font>
+        </p>
+    </div>
+</body>
+
+</html>
