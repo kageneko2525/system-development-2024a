@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 	    if (user != null) {
 	    	HttpSession session = request.getSession(true); // 新しいセッションを作成
 	    	session.setAttribute("user", user); // ユーザ情報をセッションに保存
-	    	response.sendRedirect("/site/html/index.html"); // ログイン成功時にindex.htmlにリダイレクト
+	    	response.sendRedirect("/site/html/thread_make.html"); // ログイン成功時にindex.htmlにリダイレクト
 	    } else {
 	    	// ログイン失敗時にエラーメッセージをクエリパラメータとして渡す
 	    	String errorMessage = "ログインに失敗しました。";
