@@ -2,32 +2,38 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ログイン</title>
-    <link rel="stylesheet" href="/site/css/login.css">
-    <script src="/site/js/login.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ログイン</title>
+	<link rel="stylesheet" href="/site/css/login.css">
+	<script src="/site/js/login.js"></script>
 </head>
 
 <body>
-	<div id="error-message" style="color: red;"></div>
-	<div class="login-container">
-        <h1>ログイン</h1>
-        <form id="loginForm" action="/site/Login" method="post">
-            <div class="form-group">
-                <label for="email">メールアドレス</label>
-                <input type="email" id="email" name="email" placeholder="メールアドレスを入力" required>
-            </div>
-            <div class="form-group">
-                <label for="password">パスワード</label>
-                <input type="password" id="password" name="password" placeholder="パスワードを入力" minlength="4" maxlength="8"  required>
-            </div>
-            <button type="submit" class="login-button">ログイン</button>
-        </form>
-        <!-- 新規登録リンクを追加 -->
-        <p class="signup-link">
-            はじめての方はこちら：<a href="signup.html">新規登録</a>
-        </p>
-    </div>
+	<header id="header"></header>
+	<div id="loginBox">
+		<div id="error-message" style="color: red;"></div>
+		<div class="login-container">
+			<h1>ログイン</h1>
+			<form id="loginForm" action="/site/Login" method="post">
+				<div class="form-group">
+					<label for="email">メールアドレス</label>
+					<input type="email" id="email" name="email" placeholder="メールアドレスを入力" required>
+				</div>
+				<div class="form-group">
+					<label for="password">パスワード</label>
+					<input type="password" id="password" name="password" placeholder="パスワードを入力" minlength="4"
+						maxlength="8" required>
+				</div>
+				<button type="submit" class="login-button">ログイン</button>
+			</form>
+			<!-- 新規登録リンクを追加 -->
+			<p class="signup-link">
+				はじめての方はこちら：<a href="signup.html">新規登録</a>
+			</p>
+		</div>
+	</div>
+	<script src="../parts/header.js"></script>
 </body>
+
 </html>
