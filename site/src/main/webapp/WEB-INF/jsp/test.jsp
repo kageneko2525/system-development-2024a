@@ -24,10 +24,8 @@ String escapedId = String.valueOf(id);
 <body>
 	<header id="header"></header>
 	<div class="chat-container">
-		<header class="chat-header">
-			<h1>Super Chat</h1>
-			<div id="connectStatus" class="connection-status">接続状態: 接続中...</div>
-		</header>
+
+
 
 		<main class="chat-main">
 			<!-- チャットメッセージ表示エリア -->
@@ -57,6 +55,6 @@ String escapedId = String.valueOf(id);
 
 	<script src="./js/thread.js"></script>
 	<script defer src="./js/test.js"></script>
-	<script src="../parts/header.js"></script>
+	<script src="/site/parts/header.js"></script>
 </body>
 </html>
