@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class ThreadListServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+    	response.sendRedirect("/site/html/thread_list.html");
 	}
 
 
