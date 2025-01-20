@@ -12,7 +12,7 @@ public class ProfileDao extends BaseDao {
         Profile prof = null;
         String sql = "SELECT " +
                      "    p.user_name, p.user_icon, p.user_birth, p.user_comment, " +
-                     "    pv.public_name, pv.public_birth, pv.public_display " +
+                     "    pv.public_name, pv.public_birth, pv.public_display, pv.public_comment " +
                      "FROM " +
                      "    profile p " +
                      "JOIN " +
