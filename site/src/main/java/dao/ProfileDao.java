@@ -45,6 +45,7 @@ public class ProfileDao extends BaseDao {
                 prof.setPublicName(rs.getInt("public_name"));
                 prof.setPublicBirth(rs.getInt("public_birth"));
                 prof.setPublicDisplay(rs.getInt("public_display"));
+                prof.setPublicComment(rs.getInt("public_comment"));
             }
         } catch (Exception e) {
             e.printStackTrace();
