@@ -7,6 +7,7 @@ import java.util.List;
 public class ThreadDto {
     public ThreadDto() {
         contentList = new ArrayList<ContentDto>();
+        tags = new ArrayList<String>();
     }
     public ThreadDto(String id, String title, Timestamp createTime) {
         this.id = id;

@@ -67,4 +67,83 @@
     font-size: 12px;
     color: #555;
   }
-  
+  .nav-container {
+    display: flex;
+    gap: 16px;
+    padding: 10px;
+}
+
+.nav-btn {
+    width: 44px;
+    height: 44px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.arrow-icon {
+    width: 24px;
+    height: 24px;
+    color: #333;
+    transition: transform 0.2s ease;
+}
+
+/* ホバー効果 */
+.nav-btn:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn:hover .arrow-icon {
+    transform: scale(1.1);
+}
+
+/* アクティブ状態 */
+.nav-btn:active {
+    transform: translateY(0);
+    background-color: #d0d0d0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* フォーカス状態 */
+.nav-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #333;
+}
+#search_button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#search_button:hover {
+  background-color: #45a049;
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+    .nav-btn {
+        background-color: #2a2a2a;
+    }
+    
+    .arrow-icon {
+        color: #ffffff;
+    }
+    
+    .nav-btn:hover {
+        background-color: #3a3a3a;
+    }
+    
+    .nav-btn:active {
+        background-color: #404040;
+    }
+}

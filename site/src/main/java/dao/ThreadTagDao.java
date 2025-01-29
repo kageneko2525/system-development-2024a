@@ -10,6 +10,10 @@ import model.ThreadDto;
 
 public class ThreadTagDao extends BaseDao {
 
+	/**
+	 * スレッドDTOにタグをセット
+	 * @param dto
+	 */
 	public void setTag(ThreadDto dto) {
 
 		try {
@@ -44,42 +48,11 @@ public class ThreadTagDao extends BaseDao {
 		}
 	}
 
-	public List<Integer> getThreadTitleSortNew(List<String> tagList) {
-		//戻り値となるリスト宣言
-		List<Integer> list = new ArrayList<Integer>();
-
-		try {
-			this.connect();
-
-			String sql = "SELECT * "
-					+ "FROM thread "
-					+ "WHERE thread_state = ? "
-					+ "AND thread_name LIKE '%?%'"
-					+ "ORDER BY thread_id ASC "
-					+ "LIMIT ? OFFSET ?;";
-
-			PreparedStatement ps = con.prepareStatement(sql);
-
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		} finally {
-			try {
-				this.disConnect();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return list; // データがなかった場合はデフォルト値1を返す
-	}
-
+	/**
+	 * スレッドにタグをセット
+	 * @param threadDtos
+	 * @return 引数返してるけどあんまり意味なし
+	 */
 	public List<ThreadDto> setTag(List<ThreadDto> threadDtos) {
 
 		if (threadDtos == null || threadDtos.size() == 0) {
@@ -135,6 +108,51 @@ public class ThreadTagDao extends BaseDao {
 		}
 
 		return threadDtos;
+	}
+
+	public List<ThreadDto> searchTag(String tag) {
+		ArrayList<ThreadDto> threadDtoList = new ArrayList<ThreadDto>();
+		
+		
+		try {
+			
+			this.connect();
+			
+				
+			String sql = "SELECT DISTINCT * "
+					+ "FROM thread_tag "
+					+ "WHERE tag = ? "
+					+ "ORDER BY thread_id ASC";
+
+			System.out.println(sql);
+
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ps.setString(1, tag);
+			
+			ResultSet rs = ps.executeQuery();
+
+			
+			while (rs.next()) {
+				ThreadDto threadDto = new ThreadDto();
+				threadDto.setId(rs.getString("thread_id"));
+				threadDtoList.add(threadDto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		finally {
+			try {
+				this.disConnect();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return threadDtoList;
+		
 	}
 
 }

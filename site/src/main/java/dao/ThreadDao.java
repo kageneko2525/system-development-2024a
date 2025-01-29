@@ -10,14 +10,14 @@ import java.util.List;
 import model.ThreadDto;
 
 public class ThreadDao extends BaseDao {
-	
-/**
- * IDの新しいスレッドを指定した場所から指定した数値分取得
- * @param count 何件ほしいか
- * @param offset 最初の何件飛ばすか
- * @return Threadのリスト
- */
-	public List<ThreadDto> getLatestThread(int count,int offset) {
+
+	/**
+	 * IDの新しいスレッドを指定した場所から指定した数値分取得
+	 * @param count 何件ほしいか
+	 * @param offset 最初の何件飛ばすか
+	 * @return Threadのリスト
+	 */
+	public List<ThreadDto> getLatestThread(int count, int offset) {
 
 		//戻り値となるリスト宣言
 		List<ThreadDto> list = new ArrayList<ThreadDto>();
@@ -28,7 +28,7 @@ public class ThreadDao extends BaseDao {
 			String sql = "SELECT * "
 					+ "FROM thread "
 					+ "WHERE thread_state = 0 "
-					+ "ORDER BY thread_id ASC "
+					+ "ORDER BY thread_id DESC "
 					+ "LIMIT ? OFFSET ?;";
 
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -40,7 +40,8 @@ public class ThreadDao extends BaseDao {
 
 			while (rs.next()) {
 
-				ThreadDto thread = new ThreadDto(rs.getString("thread_id"),rs.getString("thread_name"),rs.getTimestamp("thread_make"));
+				ThreadDto thread = new ThreadDto(rs.getString("thread_id"), rs.getString("thread_name"),
+						rs.getTimestamp("thread_make"));
 
 				list.add(thread);
 			}
@@ -59,8 +60,6 @@ public class ThreadDao extends BaseDao {
 		return list; // データがなかった場合はデフォルト値1を返す
 	}
 
-	
-	
 	/**
 	 * タイトル検索 新しいもの
 	 * @param title タイトル
@@ -69,52 +68,51 @@ public class ThreadDao extends BaseDao {
 	 * @param threadState 生きてるスレッドか
 	 * @return リスト
 	 */
-public List<ThreadDto> getThreadTitleSortNew(String title,int count,int offset,int threadState) {
-	//戻り値となるリスト宣言
-	List<ThreadDto> list = new ArrayList<ThreadDto>();
+	public List<ThreadDto> getThreadTitleSortNew(String title, int count, int offset, int threadState) {
+		//戻り値となるリスト宣言
+		List<ThreadDto> list = new ArrayList<ThreadDto>();
 
-	try {
-		this.connect();
-
-		String sql = "SELECT * "
-				+ "FROM thread "
-				+ "WHERE thread_state = ? "
-				+ "AND thread_name LIKE '%?%'"
-				+ "ORDER BY thread_id ASC "
-				+ "LIMIT ? OFFSET ?;";
-		
-		PreparedStatement ps = con.prepareStatement(sql);
-
-		ps.setInt(1, threadState);
-		ps.setString(2, title);
-		ps.setInt(3, count);
-		ps.setInt(4, offset);
-
-		ResultSet rs = ps.executeQuery();
-
-		while (rs.next()) {
-
-			ThreadDto thread = new ThreadDto();
-			thread.setId(rs.getNString("id"));
-			thread.setTitle(rs.getString("title"));
-			thread.setCreateTime(rs.getTimestamp("CreateTime"));
-			list.add(thread);
-		}
-
-	} catch (Exception e) {
-		e.printStackTrace();
-
-	} finally {
 		try {
-			this.disConnect();
-		} catch (SQLException e) {
+			this.connect();
+
+			String sql = "SELECT * "
+					+ "FROM thread "
+					+ "WHERE thread_state = ? "
+					+ "AND thread_name LIKE ?"
+					+ "ORDER BY thread_id DESC "
+					+ "LIMIT ? OFFSET ?;";
+
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, threadState);
+			ps.setString(2,"%" +  title+ "%");
+			ps.setInt(3, count);
+			ps.setInt(4, offset);
+			System.out.println("Executing query: " + ps.toString());
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				ThreadDto thread = new ThreadDto();
+				thread.setId(rs.getString("thread_id"));
+				thread.setTitle(rs.getString("thread_name") );
+				thread.setCreateTime(rs.getTimestamp("thread_make"));
+				list.add(thread);
+			}
+
+		} catch (Exception e) {
 			e.printStackTrace();
+
+		} finally {
+			try {
+				this.disConnect();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+
+		return list; // データがなかった場合はデフォルト値1を返す
 	}
-
-	return list; // データがなかった場合はデフォルト値1を返す
-}
-
 
 	/**
 	 * 最新のスレッドIDを検索
@@ -201,7 +199,6 @@ public List<ThreadDto> getThreadTitleSortNew(String title,int count,int offset,i
 		}
 	}
 
-	
 	/**
 	 * 新しいthreadをDB登録
 	 * @param threadDto 登録したいスレッドのDTO
@@ -243,6 +240,110 @@ public List<ThreadDto> getThreadTitleSortNew(String title,int count,int offset,i
 
 			}
 		}
+	}
+
+	public List<Integer> getThreadTitleSortNew(List<String> tagList) {
+		//戻り値となるリスト宣言
+		List<Integer> list = new ArrayList<Integer>();
+
+		try {
+			this.connect();
+
+			String sql = "SELECT * "
+					+ "FROM thread "
+					+ "WHERE thread_state = ? "
+					+ "AND thread_name LIKE '%?%'"
+					+ "ORDER BY thread_id DESC "
+					+ "LIMIT ? OFFSET ?;";
+
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				this.disConnect();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return list; // データがなかった場合はデフォルト値1を返す
+	}
+
+	/**
+	 * id検索 新しいもの
+	 * @param threadDtos 検索したいスレッドのIDが書いてあるスレッドDtoリスト
+	 * @param count 何件取得するか
+	 * @param offset 最初に何件を飛ばすか
+	 * @param threadState 生きてるスレッドか
+	 * @return リスト
+	 */
+	public List<ThreadDto> getThreadSearchIdSortNew(List<ThreadDto> threadDtos, int count, int offset,
+			int threadState) {
+		//戻り値となるリスト宣言
+		System.out.println(count);
+		System.out.println(offset);
+
+		try {
+			this.connect();
+
+			String idString = "";
+			if (0 >= threadDtos.size()) {
+				return threadDtos;
+			}
+
+				for (int i = 0; i < threadDtos.size(); i++) {
+					if (i != 0) {
+						idString += ", ";
+					}
+					idString += threadDtos.get(i).getId() + " ";
+				}
+
+			String sql = "SELECT * "
+					+ "FROM thread "
+					+ "WHERE thread_state = ? "
+					+ "AND thread_id in ( " + idString
+					+ " ) "
+					+ "ORDER BY thread_id DESC "
+					+ "LIMIT ? OFFSET ?;";
+
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ps.setInt(1, threadState);
+			ps.setInt(2, count);
+			ps.setInt(3, offset);
+			System.out.println("Executing query: " + ps.toString());
+			ResultSet rs = ps.executeQuery();
+			threadDtos = new ArrayList<ThreadDto>();
+			while (rs.next()) {
+				System.out.println("結果あった");
+				ThreadDto thread = new ThreadDto();
+				thread.setId(rs.getString("thread_id"));
+				thread.setTitle(rs.getString("thread_name"));
+				thread.setCreateTime(rs.getTimestamp("thread_make"));
+				threadDtos.add(thread);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				this.disConnect();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return threadDtos; // データがなかった場合はデフォルト値1を返す
 	}
 
 }
